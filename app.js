@@ -14,11 +14,11 @@ const mongoConnect = require('./util/database').mongoConnect;
 app.use(cors());
 app.use((req, res, next) => {
   User.findById('64b5390f08979986fa77a6ba')
-    .then(user => {
-      req.user = user;
-      next();
-    })
-    .catch(err => console.log(err));
+  .then(user => {
+    req.user = new User(user.name, user.email, user.cart, user._id);
+    next();
+  })
+  .catch(err => console.log(err));
 })
 
 app.use(adminRoutes);
