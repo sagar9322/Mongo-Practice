@@ -17,8 +17,7 @@ app.use((req, res, next) => {
 
 app.use(adminRoutes);
 
-mongoConnect(client => {
-  console.log(client);
+mongoConnect(() => {
   app.listen(3000);
 });
 

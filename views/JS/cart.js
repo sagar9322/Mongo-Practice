@@ -1,5 +1,5 @@
 function getCart() {
-    axios.get('http://localhost:4000/get-cart').then(response => {
+    axios.get('http://localhost:3000/get-cart').then(response => {
         const products = response.data;
         console.log(products);
 
@@ -62,7 +62,7 @@ function getCart() {
             // Add an event listener to the "Order Now" button
                 orderButton.onclick = (event) => {
                     event.preventDefault();
-                    axios.get('http://localhost:4000/order-now')
+                    axios.get('http://localhost:3000/order-now')
                     // container.removeChild(productDiv);
                     setTimeout(() => {
                         getCart();
@@ -88,5 +88,5 @@ function getCart() {
 
 
 function deleteFromCart(uniqId) {
-    axios.delete(`http://localhost:4000/delete-cart/${uniqId}`);
+    axios.delete(`http://localhost:3000/delete-cart/${uniqId}`);
 }

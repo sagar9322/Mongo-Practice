@@ -1,4 +1,6 @@
 const Product = require('../models/app-product');
+const mongoDb = require('mongodb');
+
 
 exports.addProduct = (req, res, next) => {
     const title = req.body.title;
@@ -17,23 +19,21 @@ exports.addProduct = (req, res, next) => {
       });
 };
 
-// exports.editProduct = (req, res, next) => {
-//     const prodId = req.params.productId;
-//     const updatedTitle = req.body.title;
-//     const updatedImageUrl = req.body.image;
-//     const updatedPrice = req.body.price;
-//     const updatedDescription = req.body.description;
-//     Product.update(
-//         { title: updatedTitle, image: updatedImageUrl, price: updatedPrice, description: updatedDescription },
-//         { where: { id: prodId } }
-//     )
-//         .then((result) => {
-//             console.log(`product updated.`);
-//         })
-//         .catch((error) => {
-//             console.error(error);
-//         });
-// }
+exports.editProduct = (req, res, next) => {
+    const prodId = req.params.productId;
+    const updatedTitle = req.body.title;
+    const updatedImageUrl = req.body.image;
+    const updatedPrice = req.body.price;
+    const updatedDescription = req.body.description;
+    const product = new Product(updatedTitle, updatedPrice, updatedDescription, updatedImageUrl, new mongoDb.ObjectId(prodId));
+    product.update()
+        .then((result) => {
+            console.log(`product updated.`);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+}
 
 // exports.addToCart = (req, res, next) => {
 //     const prodId = req.params.productId;

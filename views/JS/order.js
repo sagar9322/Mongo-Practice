@@ -1,6 +1,6 @@
 function getOrders() {
     
-    axios.get('http://localhost:4000/order-item').then(response => {
+    axios.get('http://localhost:3000/order-item').then(response => {
         const orders = response.data;
         // Get the container element to display the order items
         document.getElementById('hidden-form').style.display = "none";

@@ -5,14 +5,14 @@ async function renderAdminProducts() {
     document.getElementById('hidden-form').style.display = "none";
 
     try {
-        const response = await axios.get('http://localhost:4000/products');
+        const response = await axios.get('http://localhost:3000/products');
         const products = response.data;
 
         products.forEach(product => {
             const article = document.createElement("article");
             article.classList.add("card", "product-item");
 
-            uniqId = product.id;
+            uniqId = product._id;
             const header = document.createElement("header");
             header.classList.add("card__header");
 
@@ -63,7 +63,7 @@ async function renderAdminProducts() {
                     document.getElementById("price-ip").value = product.price;
                     document.getElementById("description-ip").value = product.description;
                     const form = document.getElementById('form');
-                    form.setAttribute('action', `http://localhost:4000/edit-product/${uniqId}`);
+                    form.setAttribute('action', `http://localhost:3000/edit-product/${uniqId}`);
                     form.setAttribute('method', 'post');
                 }
 
@@ -116,7 +116,7 @@ async function renderAdminProducts() {
 
 async function deleteFromServer(uniqId) {
     try {
-        await axios.delete(`http://localhost:4000/${uniqId}`);
+        await axios.delete(`http://localhost:3000/${uniqId}`);
         renderAdminProducts();
     } catch (error) {
         console.log(error);
