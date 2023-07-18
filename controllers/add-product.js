@@ -48,32 +48,12 @@ exports.addToCart = (req, res, next) => {
   }
 
 
-// exports.orderPost = (req, res, next)=> {
-//   let fetchedCart;
-//   req.user
-//     .getCart()
-//     .then(cart => {
-//       fetchedCart = cart;
-//       return cart.getProducts();
-//     })
-//     .then(products => {
-//       return req.user
-//         .createOrder()
-//         .then(order => {
-//           return order.addProducts(
-//             products.map(product => {
-//               product.orderItem = { quantity: product.cartItem.quantity };
-//               return product;
-//             })
-//           );
-//         })
-//         .catch(err => console.log(err));
-//     })
-//     .then(result => {
-//       return fetchedCart.setProducts(null);
-//     })
-//     .then(result => {
-//       console.log('orderd');
-//     })
-//     .catch(err => console.log(err));
-// }
+exports.orderPost = (req, res, next)=> {
+  req.user
+   .addOrder()
+    .then(result => {
+      console.log('orderd');
+      res.status(200).json({success:true});
+    })
+    .catch(err => console.log(err));
+}

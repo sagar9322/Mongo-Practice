@@ -47,11 +47,11 @@ exports.deleteCartItem = (req, res, next) => {
     .catch(err => console.log(err));
 }
 
-// exports.getOrderItem = (req, res, next) => {
-//   req.user
-//     .getOrders({include: ['products']})
-//     .then(orders => {
-//       res.send(JSON.stringify(orders));
-//       })
-//     .catch(err => console.log(err));
-// }
+exports.getOrderItem = (req, res, next) => {
+  req.user
+    .getOrders()
+    .then(orders => {
+      res.send(JSON.stringify(orders));
+      })
+    .catch(err => console.log(err));
+}

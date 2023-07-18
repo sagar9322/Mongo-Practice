@@ -16,14 +16,13 @@ function getOrders() {
 
             // Display the order details
             const orderId = document.createElement("h3");
-            orderId.textContent = "Order ID: " + order.id;
+            orderId.textContent = "Order ID: " + order._id;
             orderDiv.appendChild(orderId);
 
             const items = document.createElement("ul");
-            order.products.forEach(item => {
-                console.log(item)
+            order.items.forEach(item => {
                 const listItem = document.createElement("li");
-                listItem.textContent = item.title + " - Quantity: " + item.orderItem.quantity;
+                listItem.textContent = item.title + " - Quantity: " + item.quantity;
                 items.appendChild(listItem);
             });
             orderDiv.appendChild(items);
