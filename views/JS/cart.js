@@ -1,8 +1,7 @@
 function getCart() {
     axios.get('http://localhost:3000/get-cart').then(response => {
         const products = response.data;
-        console.log(products);
-
+        document.getElementById('hidden-form').style.display = "none";
         // Get the container element to display the cart items
         const container = document.getElementById("productContainer");
         container.style.display = "flex";
@@ -13,7 +12,7 @@ function getCart() {
 
         // Iterate over each product in the cart
         products.forEach(product => {
-            const uniqId = product.id;
+            const uniqId = product._id;
             // Create a new div element for each product
             const productDiv = document.createElement("div");
             productDiv.classList.add("cart-item");
@@ -28,15 +27,14 @@ function getCart() {
             productDiv.appendChild(price);
 
             const quantity = document.createElement("p");
-            quantity.textContent = "Quantity: " + product.cartItem.quantity;
+            quantity.textContent = "Quantity: " + product.quantity;
             productDiv.appendChild(quantity);
 
             const deleteButton = document.createElement("button");
             deleteButton.textContent = "Delete";
             deleteButton.classList.add("btn_cart");
             function deleteEvent(uniqId) {
-                deleteButton.onclick = (event) => {
-                    event.preventDefault();
+                deleteButton.onclick = () => {
                     deleteFromCart(uniqId);
                     container.removeChild(productDiv);
                     setTimeout(() => {
@@ -88,5 +86,7 @@ function getCart() {
 
 
 function deleteFromCart(uniqId) {
-    axios.delete(`http://localhost:3000/delete-cart/${uniqId}`);
+    axios.delete(`http://localhost:3000/delete-cart/${uniqId}`).then(()=> {
+        getCart();
+    });
 }

@@ -12,7 +12,7 @@ exports.addProduct = (req, res, next) => {
     product
       .save()
       .then(result => {
-        console.log(result);
+        
         console.log('Created Product');
       })
       .catch(err => {
@@ -43,7 +43,7 @@ exports.addToCart = (req, res, next) => {
       return req.user.addToCart(product);
     })
     .then(result => {
-      console.log("Added to Cart");
+      res.status(200).json({success: true})
     });
   }
 

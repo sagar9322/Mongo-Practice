@@ -23,40 +23,29 @@ exports.deleteProductDetail = (req, res, next) => {
     .catch(err => console.log(err));
 }
 
-// exports.getCart = (req, res, next) => {
-//     req.user
-//     .getCart()
-//     .then(cart => {
-//       return cart
-//         .getProducts()
-//         .then(product => {
-//             res.send(JSON.stringify(product));
-//         })
-//         .catch(err => console.log(err));
-//     })
-//     .catch(err => console.log(err));
+exports.getCart = (req, res, next) => {
+    req.user
+    .getCart()
+    .then(product => {
+      
+            res.send(JSON.stringify(product));
+        })
+        .catch(err => console.log(err));
+
+      }
 
 
-//     req.user.getCart().then()
-// }
-
-
-// exports.deleteCartItem = (req, res, next) => {
-//     const prodId = req.params.productId;
-//   req.user
-//     .getCart()
-//     .then(cart => {
-//       return cart.getProducts({ where: { id: prodId } });
-//     })
-//     .then(products => {
-//       const product = products[0];
-//       return product.cartItem.destroy();
-//     })
-//     .then(result => {
-//       console.log("deleted");
-//     })
-//     .catch(err => console.log(err));
-// }
+exports.deleteCartItem = (req, res, next) => {
+    const prodId = req.params.productId;
+    
+  req.user
+    .deleteFromCart(prodId)
+    .then(result => {
+      console.log("deleted");
+      res.status(200).json({success:true});
+    })
+    .catch(err => console.log(err));
+}
 
 // exports.getOrderItem = (req, res, next) => {
 //   req.user

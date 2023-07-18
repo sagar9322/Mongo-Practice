@@ -70,7 +70,9 @@ async function renderProducts() {
       function addToCart(uniqId) {
         addToCartButton.onclick = (event) => {
           event.preventDefault();
-          axios.get(`http://localhost:3000/add-to-cart/${uniqId}`);
+          axios.get(`http://localhost:3000/add-to-cart/${uniqId}`).then(()=> {
+            getCart();
+          });
         }
       }
       addToCart(uniqId);
